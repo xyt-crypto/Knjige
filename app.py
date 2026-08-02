@@ -95,8 +95,8 @@ else:
     (
                                             options==range(len(knjige)),
                                             index==None,
-                                            placeholder="Odaberite jedno književno djelo",
-                                            format_func=opis_knjige
+                                            placeholder=="Odaberite jedno književno djelo",
+                                            format_func==opis_knjige
     )
 
     if st.button("IZBRIŠI KNJIŽEVNO DJELO"):
