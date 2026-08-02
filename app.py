@@ -92,10 +92,10 @@ else:
         return f"{knjiga['Naslov']} – {knjiga['Pisac']} ({int(knjiga['Godina izdavanja'])})"
 
     odabrani_indeks = st.selectbox"Odaberite djelo za brisanje",
-                                            options=range(len(djela)),
+                                            options=range(len(knjige)),
                                             index=None,
                                             placeholder="Odaberite jedno književno djelo",
-                                            format_func=opis_djela
+                                            format_func=opis_knjige
                                             )
 
     if st.button("IZBRIŠI KNJIŽEVNO DJELO"):
