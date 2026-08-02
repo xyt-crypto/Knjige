@@ -91,7 +91,7 @@ else:
         knjiga = knjige.iloc[indeks]
         return f"{knjiga['Naslov']} – {knjiga['Pisac']} ({int(knjiga['Godina izdavanja'])})"
 
-    odabrani_indeks = st.selectbox"Odaberite djelo za brisanje",
+    odabrani_indeks = st.selectbox"Odaberite djelo za brisanje",(
                                             options=range(len(knjige)),
                                             index=None,
                                             placeholder="Odaberite jedno književno djelo",
