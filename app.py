@@ -93,7 +93,7 @@ else:
 
     odabrani_indeks = st.selectbox("Odaberite djelo za brisanje"),
     (
-                                            options=range(len(knjige)),
+                                            options==range(len(knjige)),
                                             index=None,
                                             placeholder="Odaberite jedno književno djelo",
                                             format_func=opis_knjige
