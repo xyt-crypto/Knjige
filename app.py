@@ -58,9 +58,9 @@ if djela.empty:
 
 else:
     traženi_pisac=st.text_input("Pretraži po piscu"),
-    placeholder=("Primjerice, Miroslav Krleža")
+    placeholder=("Primjerice, Miroslav Krleža"),
     tražena_godina_izdavanja=st.number_input("Upišite godinu:",min_value=1900, max_value=2100, value=None,
-    placeholder=("Unesite godinu")
+    placeholder=("Unesite godinu"),
     traženi_žanr=st.text_input("Pretraži po žanru"),
     placeholder=("Primjerice, psihološki triler")
 
