@@ -16,10 +16,10 @@ def učitaj_podatke():
 Knjige, radni_list=učitaj_podatke()
 
 if not Knjige.empty:
-    Knjige["Pisac"]=pd.to_numeric(Knjige["Pisac"]), errors="coerce")
-    Knjige["Godina izdavanja"]=pd.to_numeric(Knjige["Godina izdavanja"]), errors="coerce")
-    Knjige["Žanr"]=pd.to_numeric(Knjige["Žanr"]), errors="coerce")
-    Knjige["Ocjena"]=pd.to_numeric(Knjige["Ocjena"]), errors="coerce")
+    Knjige["Pisac"]=pd.to_numeric(Knjige["Pisac"], errors="coerce")
+    Knjige["Godina izdavanja"]=pd.to_numeric(Knjige["Godina izdavanja"], errors="coerce")
+    Knjige["Žanr"]=pd.to_numeric(Knjige["Žanr"], errors="coerce")
+    Knjige["Ocjena"]=pd.to_numeric(Knjige["Ocjena"], errors="coerce")
 
 st.title("Knjige")
 st.subheader(" Knjige")
