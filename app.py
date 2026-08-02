@@ -66,21 +66,21 @@ else:
 
 filtrirana_djela=djela
 
-    if traženi_pisac.strip():
-        filtrirana_djela=filtrirana_djela[filtrirana_djela["Traženi pisac"]
-                                          .str contains(traženi_pisac.strip(), case=False)]
+if traženi_pisac.strip():
+filtrirana_djela=filtrirana_djela[filtrirana_djela["Traženi pisac"]
+                                        .str contains(traženi_pisac.strip(), case=False)]
 
-    if tražena_godina_izdavanja is not None:
-        filtrirana_djela=filtrirana_djela[filtrirana_djela["Godina izdavanja"]==int(tražena_godina_izdavanja)]
+if tražena_godina_izdavanja is not None:
+filtrirana_djela=filtrirana_djela[filtrirana_djela["Godina izdavanja"]==int(tražena_godina_izdavanja)]
 
-     iftraženi_žanr.strip():
-            filtrirana_djela=filtrirana_djela[filtrirana_djela["Traženi žanr"]
-                                              .str contains(traženi_žanr.strip(), case=False)]
+if traženi_žanr.strip():
+        filtrirana_djela=filtrirana_djela[filtrirana_djela["Traženi žanr"]
+                                        .str contains(traženi_žanr.strip(), case=False)]
 
-    if filtrirana_djela.empty:
+if filtrirana_djela.empty:
         st.info("Nije pronađeno nijedno književno djelo.")
 
-    else:
+else:
         st.dataframe(filtrirana_djela, hide_index=True,)
 
 st.subheader("Brisanje književnih djela")
