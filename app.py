@@ -62,7 +62,7 @@ else:
     tražena_godina_izdavanja=st.number_input("Upišite godinu:",min_value=1900, max_value=2100, value=None,
     placeholder=("Unesite godinu"),
     traženi_žanr=st.text_input("Pretraži po žanru"),
-    placeholder=("Primjerice, psihološki triler")
+    placeholder=("Primjerice, psihološki triler"),
 
 filtrirana_djela=djela
 
