@@ -2,10 +2,6 @@ import streamlit as st
 import pandas as pd
 import gspread
 
-# -----------------------------
-# UČITAVANJE PODATAKA
-# -----------------------------
-
 def učitaj_podatke():
     podaci_računa = dict(st.secrets["gcp_service_account"])
     klijent = gspread.service_account_from_dict(podaci_računa)
@@ -20,19 +16,9 @@ def učitaj_podatke():
 
 Knjige, radni_list = učitaj_podatke()
 
-
-# -----------------------------
-# KONVERZIJE
-# -----------------------------
-
 if not Knjige.empty:
     Knjige["Godina izdavanja"] = pd.to_numeric(Knjige["Godina izdavanja"], errors="coerce")
     Knjige["Ocjena"] = pd.to_numeric(Knjige["Ocjena"], errors="coerce")
-
-
-# -----------------------------
-# PRIKAZ TABLICE
-# -----------------------------
 
 st.title("Knjige")
 st.subheader("Popis književnih djela")
@@ -41,11 +27,6 @@ if Knjige.empty:
     st.info("U tablici još nema književnih djela.")
 else:
     st.dataframe(Knjige, hide_index=True)
-
-
-# -----------------------------
-# DODAVANJE KNJIGE
-# -----------------------------
 
 st.subheader("Dodaj novo književno djelo")
 
@@ -72,11 +53,6 @@ if gumb_dodaj:
         st.rerun()
     else:
         st.warning("Unesite naslov, pisca, godinu izdavanja i žanr.")
-
-
-# -----------------------------
-# PRETRAŽIVANJE
-# -----------------------------
 
 st.subheader("Pretraži književna djela")
 
@@ -105,11 +81,6 @@ else:
     else:
         st.dataframe(filtrirana, hide_index=True)
 
-
-# -----------------------------
-# BRISANJE
-# -----------------------------
-
 st.subheader("Brisanje književnih djela")
 
 if djela.empty:
@@ -136,11 +107,6 @@ else:
             st.rerun()
         else:
             st.warning("Najprije odaberite djelo za brisanje!")
-
-
-# -----------------------------
-# NAJBOLJE TRI KNJIGE
-# -----------------------------
 
 st.subheader("Najbolje tri knjige")
 
