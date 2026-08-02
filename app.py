@@ -10,23 +10,23 @@ def učitaj_podatke():
     radni_list = tablica.worksheet("Knjige")
 
     podaci = radni_list.get_all_records()
-    Knjige = pd.DataFrame(podaci)
+    knjige = pd.DataFrame(podaci)
 
-    return Knjige, radni_list
+    return knjige, radni_list
 
-Knjige, radni_list = učitaj_podatke()
+knjige, radni_list = učitaj_podatke()
 
 if not Knjige.empty:
-    Knjige["Godina izdavanja"] = pd.to_numeric(Knjige["Godina izdavanja"], errors="coerce")
-    Knjige["Ocjena"] = pd.to_numeric(Knjige["Ocjena"], errors="coerce")
+    knjige["Godina izdavanja"] = pd.to_numeric(knjige["Godina izdavanja"], errors="coerce")
+    knjige["Ocjena"] = pd.to_numeric(knjige["Ocjena"], errors="coerce")
 
 st.title("Knjige")
 st.subheader("Popis književnih djela")
 
-if Knjige.empty:
+if knjige.empty:
     st.info("U tablici još nema književnih djela.")
 else:
-    st.dataframe(Knjige, hide_index=True)
+    st.dataframe(knjige, hide_index=True)
 
 st.subheader("Dodaj novo književno djelo")
 
@@ -56,7 +56,7 @@ if gumb_dodaj:
 
 st.subheader("Pretraži književna djela")
 
-djela = Knjige.copy()
+djela = knjige.copy()
 
 if djela.empty:
     st.info("Nema književnih djela za pretraživanje.")
@@ -65,39 +65,38 @@ else:
     tražena_godina = st.number_input("Pretraži po godini", min_value=1900, max_value=2100, value=None, placeholder="Unesite godinu")
     traženi_žanr = st.text_input("Pretraži po žanru", placeholder="Primjerice, psihološki triler")
 
-    filtrirana = djela
+    filtrirane_knjige = knjige
 
     if traženi_pisac.strip():
-        filtrirana = filtrirana[filtrirana["Pisac"].str.contains(traženi_pisac.strip(), case=False)]
+        filtrirane_knjige = filtrirane_knjige[filtrirane_knjige["Pisac"].str.contains(traženi_pisac.strip(), case=False)]
 
     if tražena_godina is not None:
-        filtrirana = filtrirana[filtrirana["Godina izdavanja"] == int(tražena_godina)]
+        filtrirane_knjige = filtrirane_knjige[filtrirane_knjige["Godina izdavanja"] == int(tražena_godina)]
 
     if traženi_žanr.strip():
-        filtrirana = filtrirana[filtrirana["Žanr"].str.contains(traženi_žanr.strip(), case=False)]
+        filtrirane_knjige = filtrirane_knjige[filtrirane_knjige["Žanr"].str.contains(traženi_žanr.strip(), case=False)]
 
-    if filtrirana.empty:
+    if filtrirane_knjige.empty:
         st.info("Nije pronađeno nijedno književno djelo.")
     else:
-        st.dataframe(filtrirana, hide_index=True)
+        st.dataframe(filtrirane_knjige, hide_index=True)
 
 st.subheader("Brisanje književnih djela")
 
-if djela.empty:
+if knjige.empty:
     st.info("Nema književnih djela za prikazivanje.")
 else:
 
-    def opis_djela(indeks):
-        djelo = djela.iloc[indeks]
-        return f"{djelo['Naslov']} – {djelo['Pisac']} ({int(djelo['Godina izdavanja'])})"
+    def opis_knjige(indeks):
+        knjiga = knjige.iloc[indeks]
+        return f"{knjiga['Naslov']} – {knjiga['Pisac']} ({int(knjiga['Godina izdavanja'])})"
 
-    odabrani_indeks = st.selectbox(
-        "Odaberite djelo za brisanje",
-        options=range(len(djela)),
-        index=None,
-        placeholder="Odaberite jedno književno djelo",
-        format_func=opis_djela
-    )
+    odabrani_indeks = st.selectbox"Odaberite djelo za brisanje",
+                                            options=range(len(djela)),
+                                            index=None,
+                                            placeholder="Odaberite jedno književno djelo",
+                                            format_func=opis_djela
+                                            )
 
     if st.button("IZBRIŠI KNJIŽEVNO DJELO"):
         if odabrani_indeks is not None:
@@ -106,12 +105,12 @@ else:
             st.success("Djelo je izbrisano.")
             st.rerun()
         else:
-            st.warning("Najprije odaberite djelo za brisanje!")
+            st.warning("Najprije odaberite knjigu za brisanje!")
 
 st.subheader("Najbolje tri knjige")
 
-if Knjige.empty:
+if knjige.empty:
     st.info("Nema književnih djela za prikaz.")
 else:
-    najbolje_tri = Knjige.sort_values(by="Ocjena", ascending=False).head(3)
+    najbolje_tri = knjige.sort_values(by="Ocjena", ascending=False).head(3)
     st.dataframe(najbolje_tri, hide_index=True)
